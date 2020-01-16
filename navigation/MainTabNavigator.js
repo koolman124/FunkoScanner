@@ -36,30 +36,6 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const SettingsStack = createStackNavigator(
-  {
-    Settings: BarcodeScanner,
-    ModalExample: ModalExample,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Scan',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-camera${focused ? '' : '-outline'}`
-          : 'md-camera'
-      }
-    />
-  ),
-};
-
-SettingsStack.path = '';
-
 const ScanStack = createStackNavigator(
   {
     Scan: BarcodeScanner,
@@ -71,7 +47,14 @@ const ScanStack = createStackNavigator(
 ScanStack.navigationOptions = {
   tabBarLabel: 'Scan',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-camera${focused ? '' : '-outline'}`
+          : 'md-camera'
+      }
+    />
   ),
 };
 
