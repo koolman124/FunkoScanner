@@ -73,61 +73,6 @@ HomeScreen.navigationOptions = {
   header: false,
 };
 
-// function submitPIDtoPPG(pid) {
-//   return fetch('https://www.poppriceguide.com/guide/trackerupdates.php', {
-//     method: 'POST',
-//     headers: {
-//       'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
-//       'origin': 'https://www.poppriceguide.com',
-//       'x-requested-with': 'XMLHttpRequest',
-//       'content-type': "application/x-www-form-urlencoded; charset=UTF-8",
-//       'accept': "*/*",
-//       'cache-control': 'no-cache',
-//       'accept-encoding': "gzip, deflate, br",
-//       'accept-language': "en-US,en;q=0.9" 
-//     },
-//     body: {
-//       "cType": "addcollitem",
-//       "cUserID": "704862",
-//       "cItemID": pid,
-//       "cName": "",
-//       "cReplace": "N",
-//       "cPurchaseDate": "",
-//       "cPurchasePrice": "0.00",
-//       "cPurchasedFrom": "",
-//       "cPkgCondition": "2",
-//       "cNotes": ""
-//     },
-//   }).then((response) => {
-//       console.log('Submitted')
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
-
-function submitPIDtoPPG(pid) {
-  return fetch('https://www.poppriceguide.com/guide/trackerupdates.php', {
-    method: 'POST',
-    headers: {
-      'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
-      'origin': 'https://www.poppriceguide.com',
-      'x-requested-with': 'XMLHttpRequest',
-      'content-type': "application/x-www-form-urlencoded; charset=UTF-8",
-      'accept': "*/*",
-      'cache-control': 'no-cache',
-      'accept-encoding': "gzip, deflate, br",
-      'accept-language': "en-US,en;q=0.9" 
-    },
-    body: 'cType=addcollitem&cUserID=704862&cItemID='.concat(pid).concat('&cName=&cReplace=N&cPurchaseDate=&cPurchasePrice=0.00&cPurchasedFrom=&cPkgCondition=2&cNotes='),
-  }).then((response) => {
-      console.log('Submitted')
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function DevelopmentModeNotice() {
   if (__DEV__) {
     const learnMoreButton = (
