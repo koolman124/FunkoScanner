@@ -88,6 +88,8 @@ export default class BarcodeScanner extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
-    this.getProductsFromFunkoAPI(data)
+    // console.log(data)
+    // console.log(parseInt(data, 10))
+    this.getProductsFromFunkoAPI(parseInt(data, 10))
   };
 }
