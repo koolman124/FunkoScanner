@@ -5,6 +5,7 @@ import cio from 'cheerio-without-node-native';
 
 class ModalExample extends Component {
   state = {
+    ppgUserID: '',
     modalVisible: false,
     ppg_array: []
   };
@@ -26,7 +27,7 @@ class ModalExample extends Component {
       'accept-encoding': "gzip, deflate, br",
       'accept-language': "en-US,en;q=0.9" 
     },
-    body: 'cType=addcollitem&cUserID=704862&cItemID='.concat(pid).concat('&cName=&cReplace=N&cPurchaseDate=&cPurchasePrice=0.00&cPurchasedFrom=&cPkgCondition=2&cNotes='),
+    body: 'cType=addcollitem&cUserID='.concat(this.state.ppgUserID).concat('&cItemID=').concat(pid).concat('&cName=&cReplace=N&cPurchaseDate=&cPurchasePrice=0.00&cPurchasedFrom=&cPkgCondition=2&cNotes='),
   }).then((response) => {
       console.log('Submitted')
     })
@@ -67,7 +68,14 @@ class ModalExample extends Component {
             });
         }
 
-        this.setState({ppg_array: products})
+        const ppgUserID = this.props.navigation.getParam('ppgUserID', '');
+
+        console.log(ppgUserID);
+
+        this.setState({
+          ppg_array: products,
+          ppgUserID: ppgUserID
+        });
 
         this.setModalVisible(true);
     }
