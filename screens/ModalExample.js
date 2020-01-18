@@ -125,21 +125,23 @@ class ModalExample extends Component {
                 onPress={() => {
                   console.log(
                     u.title
-                      .replace(/([.*+?^=!:${}()|\[\]\/\\])/g, " ")
+                      .replace("w/", " ")
+                      .replace("W/", " ")
+                      .replace(/([.*+,?^=!:${}()|\[\]\/\\])/g, " ")
                       .replace(/glows/gi, "glow")
                       .replace("R&M", " ")
                       .replace("2 Pack", "")
-                      .replace(/-/g, "")
-                      .concat(" ", u.boxNumber)
+                      .replace(/-/g, " ")
                   );
                   this.fetchFromPPG(
                     u.title
-                      .replace(/([.*+?^=!:${}()|\[\]\/\\])/g, " ")
+                      .replace("w/", " ")
+                      .replace("W/", " ")
+                      .replace(/([.*+?,^=!:${}()|\[\]\/\\])/g, " ")
                       .replace(/glows/gi, "glow")
                       .replace("R&M", " ")
                       .replace("2 Pack", "")
-                      .replace(/-/g, "")
-                      .concat(" ", u.boxNumber)
+                      .replace(/-/g, " ")
                   );
                 }}
               />
