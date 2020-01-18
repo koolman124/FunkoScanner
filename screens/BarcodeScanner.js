@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
+import * as React from "react";
+import { Text, View, StyleSheet, Button } from "react-native";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default class BarcodeScanner extends React.Component {
   state = {
     hasCameraPermission: null,
-    scanned: false,
+    scanned: false
   };
 
   async componentDidMount() {
@@ -17,30 +17,31 @@ export default class BarcodeScanner extends React.Component {
 
   getPermissionsAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-  }
+    this.setState({ hasCameraPermission: status === "granted" });
+  };
 
   getProductsFromFunkoAPI(data) {
-    return fetch('https://www.funko.com/api/search/fields', {
-      method: 'POST',
+    return fetch("https://www.funko.com/api/search/fields", {
+      method: "POST",
       headers: {
-        'user-agent': "Popspedia/28 CFNetwork/978.0.7 Darwin/18.7.0",
-        'content-type': "application/json",
-        'accept': "*/*",
-        'cache-control': 'no-cache',
-        'accept-encoding': "gzip, deflate, br",
-        'accept-language': "en-US"
+        "user-agent": "Popspedia/28 CFNetwork/978.0.7 Darwin/18.7.0",
+        "content-type": "application/json",
+        accept: "*/*",
+        "cache-control": "no-cache",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US"
       },
       body: JSON.stringify({
-        'upc': data
-      }),
-    }).then((response) => response.json())
-      .then((responseJson) => {
-        const ppgUserID = this.props.navigation.getParam('ppgUserID', '');
-        this.props.navigation.navigate('Products', {
+        upc: data
+      })
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        const ppgUserID = this.props.navigation.getParam("ppgUserID", "");
+        this.props.navigation.navigate("Products", {
           product_array: responseJson.hits,
           ppgUserID: ppgUserID
-        })
+        });
         // if (responseJson.total > 1)
         // {
         //   console.log("More than one product")
@@ -52,7 +53,7 @@ export default class BarcodeScanner extends React.Component {
         //   alert(`Found ${productName} `);
         // }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   }
@@ -70,9 +71,10 @@ export default class BarcodeScanner extends React.Component {
       <View
         style={{
           flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-        }}>
+          flexDirection: "column",
+          justifyContent: "flex-end"
+        }}
+      >
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
@@ -80,7 +82,7 @@ export default class BarcodeScanner extends React.Component {
 
         {scanned && (
           <Button
-            title={'Tap to Scan Again'}
+            title={"Tap to Scan Again"}
             onPress={() => this.setState({ scanned: false })}
           />
         )}
@@ -92,6 +94,6 @@ export default class BarcodeScanner extends React.Component {
     this.setState({ scanned: true });
     // console.log(data)
     // console.log(parseInt(data, 10))
-    this.getProductsFromFunkoAPI(parseInt(data, 10))
+    this.getProductsFromFunkoAPI(parseInt(data, 10));
   };
 }
