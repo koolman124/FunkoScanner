@@ -110,6 +110,18 @@ class ModalExample extends Component {
           return cards;
     }
 
+    createPPGmsg() {
+      if (this.state.ppg_array.length > 0) {
+        return (
+          <Text style={styles.resultText}>Choose one of the following: </Text>
+        )
+      } else {
+        return (
+          <Text style={styles.resultText}>No result found. Try again or enter product manually.</Text>
+        )
+      }
+    }
+
   render() {
     return (
       <View style={{marginTop: 22}}>
@@ -120,19 +132,11 @@ class ModalExample extends Component {
           onRequestClose={() => {
             // Alert.alert('Modal has been closed.');
             this.setModalVisible(!this.state.modalVisible);
-            if (this.state.ppg_array.length > 0) {
-              return (
-                <Text style={{fontSize: 25}}>Choose one of the following: </Text>
-              )
-            } else {
-              return (
-                <Text style={{fontSize: 25}}>No result found. Try again or enter product manually.</Text>
-              )
-            }
           }}>
           <ScrollView style={styles.modal}>
-              <Text style={{fontSize: 25}}>PPG Results </Text>
+              <Text style={styles.headerText}>PPG Results </Text>
             <View>
+                {this.createPPGmsg()}
                {
                    this.state.ppg_array.map((u, i) => {
                     return (
@@ -149,7 +153,7 @@ class ModalExample extends Component {
                                     title='Add to PPG collection' 
                                     onPress={() => {
                                         this.submitPIDtoPPG(u.productId);
-                                        alert(`Adding product ${u.productName} to collection with PID: ${u.productId}`)
+                                        alert(`Added product: ${u.productName} to collection. If product was not added to your collection, the User ID you entered was incorrect.`)
                                     }}
                                 />
                             </View>
@@ -169,13 +173,7 @@ class ModalExample extends Component {
             </View>
           </ScrollView>
         </Modal>
-
-        {/* <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight> */}
+        
         <ScrollView>
           {this.createCards()}
         </ScrollView>
@@ -195,12 +193,28 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     modalClose: {
-      fontSize: 30
+      fontSize: 20,
+      padding: 10
     },
     cardContents: {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    headerText: {
+      paddingTop: 50,
+      paddingBottom: 20,
+      color: 'rgba(0,0,0,0.4)',
+      fontSize: 24,
+      lineHeight: 19,
+      textAlign: 'center',
+    },
+    resultText: {
+      paddingTop: 20,
+      paddingBottom: 20,
+      fontSize: 24,
+      lineHeight: 19,
+      textAlign: 'center',
     }
 });
 
