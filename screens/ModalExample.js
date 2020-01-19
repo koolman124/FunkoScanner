@@ -52,6 +52,28 @@ class ModalExample extends Component {
       });
   }
 
+  fetchfromHobby(hobbyID, productName) {
+    const hobbyUrl = 'https://www.hobbydb.com/api/catalog_items/'.concat(hobbyID).concat('/curator_price_guide');
+    return fetch(hobbyUrl, {
+      method: "GET",
+      headers: {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
+        "cache-control": "no-cache",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US"
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log('Found in HobbyDB: ' + responseJson.data.attributes.name);
+        this.fetchFromPPG(responseJson.data.attributes.name);
+      })
+      .catch(error => {
+        this.fetchFromPPG(productName);
+        console.error(error);
+      });
+  }
+
   async fetchFromPPG(productName) {
     const searchUrl = "https://www.poppriceguide.com/guide/searchresults.php?search=".concat(
       productName
@@ -87,17 +109,12 @@ class ModalExample extends Component {
         };
 
         products.push(product);
-
-        // console.log($(pid).attr('id'));
-        // console.log($(pid).find('div .itemname').text())
-        // console.log($(pid).find('div .itemvalue').text());
-        // console.log($(pid).find('div .col-50').find('a').children().attr('src'));
       });
     }
 
     const ppgUserID = this.props.navigation.getParam("ppgUserID", "");
 
-    console.log(ppgUserID);
+    // console.log(ppgUserID);
 
     this.setState({
       ppg_array: products,
@@ -133,7 +150,7 @@ class ModalExample extends Component {
                       .replace("2 Pack", "")
                       .replace(/-/g, " ")
                   );
-                  this.fetchFromPPG(
+                  this.fetchfromHobby(u.hobbyDbId,
                     u.title
                       .replace("w/", " ")
                       .replace("W/", " ")

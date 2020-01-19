@@ -37,21 +37,12 @@ export default class BarcodeScanner extends React.Component {
     })
       .then(response => response.json())
       .then(responseJson => {
+        // console.log(responseJson.hits);
         const ppgUserID = this.props.navigation.getParam("ppgUserID", "");
         this.props.navigation.navigate("Products", {
           product_array: responseJson.hits,
           ppgUserID: ppgUserID
         });
-        // if (responseJson.total > 1)
-        // {
-        //   console.log("More than one product")
-        // }
-        // else {
-        //   console.log("Found product")
-        //   var productName = responseJson.hits[0].title
-        //   console.log(productName)
-        //   alert(`Found ${productName} `);
-        // }
       })
       .catch(error => {
         console.error(error);
