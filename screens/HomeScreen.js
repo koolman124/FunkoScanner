@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Image,
   Platform,
@@ -7,7 +7,7 @@ import {
   Text,
   View,
   Alert
-} from "react-native";
+} from 'react-native'
 import {
   TextInput,
   Button,
@@ -17,19 +17,19 @@ import {
   Card,
   Title,
   Paragraph
-} from "react-native-paper";
+} from 'react-native-paper'
 
 export default class HomeScreen extends React.Component {
   state = {
-    ppgUserID: "",
+    ppgUserID: '',
     visible: false
-  };
+  }
 
-  _showModal = () => this.setState({ visible: true });
-  _hideModal = () => this.setState({ visible: false });
+  _showModal = () => this.setState({ visible: true })
+  _hideModal = () => this.setState({ visible: false })
 
   render() {
-    const { visible } = this.state;
+    const { visible } = this.state
     return (
       <Provider>
         <View style={styles.container}>
@@ -39,7 +39,7 @@ export default class HomeScreen extends React.Component {
           >
             <View style={styles.welcomeContainer}>
               <Image
-                source={require("../assets/images/fnkoscannerlogo.png")}
+                source={require('../assets/images/fnkoscannerlogo.png')}
                 style={styles.welcomeImage}
               />
             </View>
@@ -60,9 +60,9 @@ export default class HomeScreen extends React.Component {
               <TextInput
                 label="PPG User ID"
                 mode="outlined"
-                style={{ width: "90%" }}
+                style={{ width: '90%' }}
                 value={this.state.user}
-                onChangeText={ppgUserID => this.setState({ ppgUserID })}
+                onChangeText={(ppgUserID) => this.setState({ ppgUserID })}
               />
             </View>
 
@@ -70,12 +70,12 @@ export default class HomeScreen extends React.Component {
               <Button
                 mode="contained"
                 onPress={() => {
-                  if (this.state.ppgUserID != "") {
-                    this.props.navigation.navigate("Scan", {
+                  if (this.state.ppgUserID != '') {
+                    this.props.navigation.navigate('Scan', {
                       ppgUserID: this.state.ppgUserID
-                    });
+                    })
                   } else {
-                    Alert.alert("Enter User ID please.");
+                    Alert.alert('Enter User ID please.')
                   }
                 }}
               >
@@ -103,14 +103,14 @@ export default class HomeScreen extends React.Component {
                     <Paragraph>
                       Login to your Poppriceguide account on the site.
                     </Paragraph>
-                    <Image source={require("../assets/images/step1.png")} />
+                    <Image source={require('../assets/images/step1.png')} />
                     <Title>Step 2</Title>
                     <Paragraph>
                       Once logged in, you should be redirected to the account
                       page. If it doesn't redirect, click the profile text in
-                      the header bar.{" "}
+                      the header bar.{' '}
                     </Paragraph>
-                    <Image source={require("../assets/images/step2.png")} />
+                    <Image source={require('../assets/images/step2.png')} />
                     <Paragraph>
                       Here is where you will right click on the page and click
                       view source. Ctrl + U may work as well.
@@ -123,7 +123,7 @@ export default class HomeScreen extends React.Component {
                       that same line, there will be value="random numbers".
                       These random numbers is your User ID.
                     </Paragraph>
-                    <Image source={require("../assets/images/step3.png")} />
+                    <Image source={require('../assets/images/step3.png')} />
                   </Card.Content>
                   <Card.Actions>
                     <Button onPress={this._hideModal}>Ok</Button>
@@ -134,50 +134,50 @@ export default class HomeScreen extends React.Component {
           </ScrollView>
         </View>
       </Provider>
-    );
+    )
   }
 }
 
 HomeScreen.navigationOptions = {
   header: () => false
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff'
   },
   developmentModeText: {
     marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
+    color: 'rgba(0,0,0,0.4)',
     fontSize: 14,
     lineHeight: 19,
-    textAlign: "center"
+    textAlign: 'center'
   },
   noteText: {
     marginBottom: 20,
-    color: "red",
+    color: 'red',
     fontSize: 15,
     lineHeight: 19,
-    textAlign: "center"
+    textAlign: 'center'
   },
   contentContainer: {
     paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 5,
     marginBottom: 20
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: "contain",
+    resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10
   },
   getStartedContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 5,
     marginHorizontal: 20
   },
@@ -185,27 +185,27 @@ const styles = StyleSheet.create({
     marginVertical: 7
   },
   codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
+    color: 'rgba(96,100,109, 0.8)'
   },
   codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
+    backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
     paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: "rgba(96,100,109, 1)",
+    color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
-    textAlign: "center"
+    textAlign: 'center'
   },
   tabBarInfoContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
     ...Platform.select({
       ios: {
-        shadowColor: "black",
+        shadowColor: 'black',
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
         shadowRadius: 3
@@ -214,27 +214,27 @@ const styles = StyleSheet.create({
         elevation: 20
       }
     }),
-    alignItems: "center",
-    backgroundColor: "#fbfbfb",
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
     paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    textAlign: "center"
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center'
   },
   navigationFilename: {
     marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: "center"
+    alignItems: 'center'
   },
   helpLink: {
     paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: "#2e78b7"
+    color: '#2e78b7'
   }
-});
+})
